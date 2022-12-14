@@ -1,0 +1,14 @@
+semgrep:
+  name: semgrep
+  runs-on: ubuntu-latestg
+  container:
+    image: returntocorp/semgrep:1.1.0
+  if: (github.actor != 'dependabot[bot]')
+  steps:
+    - name: "Checkout source"
+      uses: actions/checkout@v3
+
+    - name: "Execute semgrep"
+      run: semgrep container
+      env:
+        SEMGREP_RULES: p/default
